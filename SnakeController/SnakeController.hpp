@@ -8,6 +8,7 @@
 #include "IEventHandler.hpp"
 #include "SnakeInterface.hpp"
 #include "SnakeWorld.hpp"
+#include "SnakeSegments.hpp"
 
 class Event;
 class IPort;
@@ -40,15 +41,8 @@ private:
     IPort& m_scorePort;
 
     SnakeWorld m_snakeWorld;
-    
-    struct Segment
-    {
-        int x;
-        int y;
-    };
 
-    std::list<Segment> m_segments;
-    Direction m_currentDirection;
+    SnakeSegments m_snakeSegments;
 
     void handleTimeoutInd();
     void handleDirectionInd(std::unique_ptr<Event>);
@@ -57,10 +51,10 @@ private:
     void handlePauseInd(std::unique_ptr<Event>);
 
     bool isSegmentAtPosition(int x, int y) const;
-    Segment calculateNewHead() const;
-    void updateSegmentsIfSuccessfullMove(Segment const& newHead);
-    void addHeadSegment(Segment const& newHead);
-    void removeTailSegmentIfNotScored(Segment const& newHead);
+    SnakeSegments::Segment calculateNewHead() const;
+    void updateSegmentsIfSuccessfullMove(SnakeSegments::Segment const& newHead);
+    void addHeadSegment(SnakeSegments::Segment const& newHead);
+    void removeTailSegmentIfNotScored(SnakeSegments::Segment const& newHead);
     void removeTailSegment();
 
     bool isPositionOutsideMap(int x, int y) const;
