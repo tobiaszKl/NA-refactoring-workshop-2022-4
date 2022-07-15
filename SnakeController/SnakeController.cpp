@@ -235,12 +235,13 @@ void Controller::handlePauseInd(std::unique_ptr<Event> e)
 
 void Controller::updateScore(int score){
     score = m_snakeSegments.getSize();
+    m_scorePort.send(std::make_unique<EventT<ScoreInd>>());
 }
 
 void Controller::handleScoreInd(std::unique_ptr<Event> e){
-    auto score = payload<ScoreInd>(*e);
+    auto score = payload<ScoreInd>(*e).score;
 
-    updateScore(score.score);
+    updateScore(score);
 }
 
 void Controller::receive(std::unique_ptr<Event> e)

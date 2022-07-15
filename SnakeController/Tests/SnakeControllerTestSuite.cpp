@@ -250,9 +250,13 @@ struct SnakeEatTestSuite : SnakeTest
 
 TEST_F(SnakeEatTestSuite, test_IfFoodEncountered_SendFoodRequestAndScoreIndication)
 {
+    ScoreInd scoreInd;
+    scoreInd.score = 1;
+
     EXPECT_CALL(displayPortMock, send_rvr(DisplayIndEq(21, 20, Cell_SNAKE)));
     EXPECT_CALL(foodPortMock, send_rvr(AnyFoodReq()));
-    EXPECT_CALL(scorePortMock, send_rvr(AnyScoreInd()));
+    //EXPECT_CALL(scorePortMock, send_rvr(AnyScoreInd()));
+    EXPECT_CALL(scorePortMock, send_rvr(ScoreIndEq(scoreInd)));
 
     sut->receive(te.clone());
 }

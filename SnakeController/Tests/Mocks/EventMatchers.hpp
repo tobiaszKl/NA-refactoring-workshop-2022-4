@@ -36,4 +36,11 @@ MATCHER(AnyFoodReq, "")
     return FoodReq::MESSAGE_ID == arg.getMessageId();
 }
 
+MATCHER_P(ScoreIndEq, score , "")
+{
+    auto const& l_score = payload<ScoreInd>(arg);
+    *result_listener << "player score: " << score.score;
+    return l_score.score == score.score;
+}
+
 } // namespace Snake
