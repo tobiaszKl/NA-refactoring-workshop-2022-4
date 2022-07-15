@@ -20,6 +20,8 @@ public:
     void popBackSegment();
     void pushFrontSegment(Segment m_segment);
     void setDirection(Snake::Direction newDirection);
+
+    std::size_t getSize() const;
     
     Snake::Direction getDirection() const;
 

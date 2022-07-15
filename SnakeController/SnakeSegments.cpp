@@ -38,3 +38,7 @@ void SnakeSegments::setDirection(Snake::Direction newDirection){
 Snake::Direction SnakeSegments::getDirection() const{
     return m_currentDirection;
 }
+
+std::size_t SnakeSegments::getSize() const {
+    return m_segments.size();
+}

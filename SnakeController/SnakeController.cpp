@@ -233,6 +233,16 @@ void Controller::handlePauseInd(std::unique_ptr<Event> e)
     m_paused = not m_paused;
 }
 
+void Controller::updateScore(int score){
+    score = m_snakeSegments.getSize();
+}
+
+void Controller::handleScoreInd(std::unique_ptr<Event> e){
+    auto score = payload<ScoreInd>(*e);
+
+    updateScore(score.score);
+}
+
 void Controller::receive(std::unique_ptr<Event> e)
 {
     switch (e->getMessageId()) {
@@ -252,6 +262,8 @@ void Controller::receive(std::unique_ptr<Event> e)
             return handleFoodResp(std::move(e));
         case PauseInd::MESSAGE_ID:
             return handlePauseInd(std::move(e));
+        case ScoreInd::MESSAGE_ID:
+            return handleScoreInd(std::move(e));
         default:
             throw UnexpectedEventException();
     }

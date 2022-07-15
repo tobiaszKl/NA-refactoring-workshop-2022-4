@@ -49,6 +49,7 @@ private:
     void handleFoodInd(std::unique_ptr<Event>);
     void handleFoodResp(std::unique_ptr<Event>);
     void handlePauseInd(std::unique_ptr<Event>);
+    void handleScoreInd(std::unique_ptr<Event>);
 
     bool isSegmentAtPosition(int x, int y) const;
     SnakeSegments::Segment calculateNewHead() const;
@@ -56,6 +57,7 @@ private:
     void addHeadSegment(SnakeSegments::Segment const& newHead);
     void removeTailSegmentIfNotScored(SnakeSegments::Segment const& newHead);
     void removeTailSegment();
+    void updateScore(int score);
 
     bool isPositionOutsideMap(int x, int y) const;
 
